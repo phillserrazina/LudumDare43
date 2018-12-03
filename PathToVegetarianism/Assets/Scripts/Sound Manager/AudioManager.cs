@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
 	public Sound[] sounds;
 
 	private bool menuAudio = false;
+	private bool levelAudio = false;
 	private bool finalSceneAudio = false;
 
 	void Awake()
@@ -36,27 +37,32 @@ public class AudioManager : MonoBehaviour
 		}
 	}
 
-	private void Start()
-	{
-		if (SceneManager.GetActiveScene().name == "MainMenu") {
-			Play ("MenuTheme");
-			menuAudio = true;
-		}
-	}
-
 	private void Update()
 	{
-		if (menuAudio && SceneManager.GetActiveScene().name == "Tutorial")
+		if (!menuAudio && SceneManager.GetActiveScene().name == "MainMenu") 
+		{
+			StopAll ();
+			Play ("MenuTheme");
+			menuAudio = true;
+			levelAudio = false;
+			finalSceneAudio = false;
+		}
+
+		else if (!levelAudio && SceneManager.GetActiveScene().name == "Tutorial")
 		{
 			StopAll ();
 			Play ("LevelTheme");
 			menuAudio = false;
+			levelAudio = true;
+			finalSceneAudio = false;
 		}
 
-		if (!finalSceneAudio && SceneManager.GetActiveScene().name == "FinalScene")
+		else if (!finalSceneAudio && SceneManager.GetActiveScene().name == "FinalScene")
 		{
 			StopAll ();
 			Play ("FinalTheme");
+			menuAudio = false;
+			levelAudio = false;
 			finalSceneAudio = true;
 		}
 	}
