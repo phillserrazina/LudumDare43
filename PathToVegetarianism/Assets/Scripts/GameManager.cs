@@ -40,7 +40,10 @@ public class GameManager : MonoBehaviour {
 	public void MainMenu()
 	{
 		if (Input.GetKey (KeyCode.Escape))
+		{
 			ChangeScene ("MainMenu");
+			Player.levelCount = 0;
+		}
 	}
 
 	public static void ChangeScene (string sceneName) {
