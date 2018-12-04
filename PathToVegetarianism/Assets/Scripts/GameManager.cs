@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour {
 			ChangeScene (sceneChange.scene);
 
 		gameOver = false;
+
+		if (SceneManager.GetActiveScene().name == "MainMenu")
+			Player.levelCount = 0;
 	}
 
 	public void ExitGame() {
@@ -40,10 +43,7 @@ public class GameManager : MonoBehaviour {
 	public void MainMenu()
 	{
 		if (Input.GetKey (KeyCode.Escape))
-		{
 			ChangeScene ("MainMenu");
-			Player.levelCount = 0;
-		}
 	}
 
 	public static void ChangeScene (string sceneName) {
